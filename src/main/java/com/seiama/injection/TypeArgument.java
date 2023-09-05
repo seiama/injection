@@ -27,7 +27,7 @@ import com.google.common.reflect.TypeParameter;
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A {@link TypeParameter} which contains the type argument.
@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
  * @see TypeToken#where(TypeParameter, TypeToken)
  * @since 1.0.0
  */
+@NullMarked
 @SuppressWarnings("UnstableApiUsage")
 public abstract class TypeArgument<T> extends TypeParameter<T> {
   final TypeToken<? extends T> actual;
@@ -50,7 +51,7 @@ public abstract class TypeArgument<T> extends TypeParameter<T> {
    * @param key a key containing the actual type
    * @since 1.0.0
    */
-  public TypeArgument(final @NotNull Key<? extends T> key) {
+  public TypeArgument(final Key<? extends T> key) {
     this(key.getTypeLiteral());
   }
 
@@ -60,7 +61,7 @@ public abstract class TypeArgument<T> extends TypeParameter<T> {
    * @param actual the actual type
    * @since 1.0.0
    */
-  public TypeArgument(final @NotNull Class<? extends T> actual) {
+  public TypeArgument(final Class<? extends T> actual) {
     this(TypeToken.of(actual));
   }
 
@@ -70,7 +71,7 @@ public abstract class TypeArgument<T> extends TypeParameter<T> {
    * @param actual the actual type
    * @since 1.0.0
    */
-  public TypeArgument(final @NotNull TypeLiteral<? extends T> actual) {
+  public TypeArgument(final TypeLiteral<? extends T> actual) {
     this(EvenMoreTypes.token(actual));
   }
 
@@ -80,7 +81,7 @@ public abstract class TypeArgument<T> extends TypeParameter<T> {
    * @param actual the actual type
    * @since 1.0.0
    */
-  public TypeArgument(final @NotNull TypeToken<? extends T> actual) {
+  public TypeArgument(final TypeToken<? extends T> actual) {
     this.actual = actual;
   }
 }

@@ -25,8 +25,9 @@ package com.seiama.injection;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.TypeLiteral;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 @SuppressWarnings("UnstableApiUsage")
 final class EvenMoreTypes {
   private EvenMoreTypes() {
@@ -40,7 +41,7 @@ final class EvenMoreTypes {
    * @return the type literal
    * @since 1.0.0
    */
-  public static <T> @NotNull TypeLiteral<T> literal(final @NotNull TypeToken<T> token) {
+  public static <T> TypeLiteral<T> literal(final TypeToken<T> token) {
     @SuppressWarnings("unchecked")
     final TypeLiteral<T> literal = (TypeLiteral<T>) TypeLiteral.get(token.getType());
     return literal;
@@ -54,7 +55,7 @@ final class EvenMoreTypes {
    * @return the type token
    * @since 1.0.0
    */
-  public static <T> @NotNull TypeToken<T> token(final @NotNull TypeLiteral<T> literal) {
+  public static <T> TypeToken<T> token(final TypeLiteral<T> literal) {
     @SuppressWarnings("unchecked")
     final TypeToken<T> token = (TypeToken<T>) TypeToken.of(literal.getType());
     return token;

@@ -147,9 +147,6 @@
     <!-- https://checkstyle.org/config_javadoc.html#MissingJavadocMethod -->
     <module name="MissingJavadocMethod"/>
 
-    <!-- https://checkstyle.org/config_javadoc.html#MissingJavadocPackage -->
-    <module name="MissingJavadocPackage"/>
-
     <!-- https://checkstyle.org/config_javadoc.html#MissingJavadocType -->
     <module name="MissingJavadocType"/>
 

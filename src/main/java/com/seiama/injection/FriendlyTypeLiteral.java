@@ -30,7 +30,7 @@ import com.google.inject.util.Types;
 import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Set;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Represents a generic type {@code T}.
@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <T> the type
  * @since 1.0.0
  */
+@NullMarked
 @SuppressWarnings("UnstableApiUsage")
 public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
   /**
@@ -50,7 +51,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @since 1.0.0
    */
   @SuppressWarnings("checkstyle:MethodName")
-  public static <T> @NotNull TypeLiteral<Set<T>> setOf(final @NotNull Class<T> elementType) {
+  public static <T> TypeLiteral<Set<T>> setOf(final Class<T> elementType) {
     return setOf(TypeLiteral.get(elementType));
   }
 
@@ -62,7 +63,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @since 1.0.0
    */
   @SuppressWarnings("checkstyle:MethodName")
-  public static <T> @NotNull TypeLiteral<Set<T>> setOf(final @NotNull TypeLiteral<T> elementType) {
+  public static <T> TypeLiteral<Set<T>> setOf(final TypeLiteral<T> elementType) {
     @SuppressWarnings("unchecked")
     final TypeLiteral<Set<T>> literal = (TypeLiteral<Set<T>>) TypeLiteral.get(Types.setOf(elementType.getType()));
     return literal;
@@ -75,7 +76,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @see Types#mapOf(Type, Type)
    * @since 1.0.0
    */
-  public static <K, V> @NotNull TypeLiteral<Map<K, V>> mapOf(final @NotNull Class<K> keyType, final @NotNull Class<V> valueType) {
+  public static <K, V> TypeLiteral<Map<K, V>> mapOf(final Class<K> keyType, final Class<V> valueType) {
     return mapOf(TypeLiteral.get(keyType), TypeLiteral.get(valueType));
   }
 
@@ -86,7 +87,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @see Types#mapOf(Type, Type)
    * @since 1.0.0
    */
-  public static <K, V> @NotNull TypeLiteral<Map<K, V>> mapOf(final @NotNull TypeLiteral<K> keyType, final @NotNull TypeLiteral<V> valueType) {
+  public static <K, V> TypeLiteral<Map<K, V>> mapOf(final TypeLiteral<K> keyType, final TypeLiteral<V> valueType) {
     @SuppressWarnings("unchecked")
     final TypeLiteral<Map<K, V>> literal = (TypeLiteral<Map<K, V>>) TypeLiteral.get(Types.mapOf(keyType.getType(), valueType.getType()));
     return literal;
@@ -102,7 +103,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @since 1.0.0
    */
   @SuppressWarnings({"rawtypes", "unchecked"})
-  public @NotNull TypeLiteral<T> where(final @NotNull TypeArgument<?> @NotNull ... args) {
+  public TypeLiteral<T> where(final TypeArgument<?>... args) {
     // https://github.com/google/guice/issues/657
     TypeToken<T> token = EvenMoreTypes.token(this);
     for (final TypeArgument arg : args) {
@@ -118,7 +119,7 @@ public abstract class FriendlyTypeLiteral<T> extends TypeLiteral<T> {
    * @return a type literal
    * @since 1.0.0
    */
-  public @NotNull TypeLiteral<T> in(final @NotNull Class<?> declaringClass) {
+  public TypeLiteral<T> in(final Class<?> declaringClass) {
     final TypeToken<?> token = TypeToken.of(declaringClass).resolveType(this.getType());
     @SuppressWarnings("unchecked")
     final TypeLiteral<T> literal = (TypeLiteral<T>) EvenMoreTypes.literal(token);
